@@ -1,10 +1,11 @@
 import React, { useState , useEffect} from 'react';
 import './App.css';
 import axios from "axios";
-import Header from './components/ui/Header'
+import Header from './components/ui/Header';
+import CharacterGrid from './components/characters/CharacterGrid'
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -12,7 +13,7 @@ const App = () => {
       const result = await axios(`https://www.breakingbadapi.com/api/characters`)
       console.log(result.data)
 
-      setPersons(result.date)
+      setItems(result.date)
       setIsLoading(false)
     }
     fetchItems()
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div className="container">
       <Header />
+      <CharacterGrid isLoading={isLoading} items={items} />
     </div>
   )
 }
